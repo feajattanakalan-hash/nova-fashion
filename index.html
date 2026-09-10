@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA | WEAR THE FUTURE</title>
+  <meta name="description" content="Premium modern fashion e-commerce store.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/style.css">
+  
+  <!-- Three.js & GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <h1 class="brand-font loader-logo">NOVA</h1>
+      <p class="loader-tagline">WEAR THE FUTURE.</p>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor (Desktop) -->
+  <div class="custom-cursor" id="custom-cursor">
+    <span class="cursor-text" id="cursor-text"></span>
+  </div>
+
+  <!-- Theme Transition Layer -->
+  <div class="theme-transition-layer" id="theme-transition-layer"></div>
+
+  <!-- Background Animated Layers -->
+  <div class="bg-noise"></div>
+  <div class="bg-glow"></div>
+  
+  <div class="floating-label label-1">NOVA / 01</div>
+  <div class="floating-label label-2">EST. 2026</div>
+
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="header-container">
+      <div class="logo brand-font" data-magnetic>NOVA</div>
+      <nav class="desktop-nav">
+        <a href="#new" data-magnetic>NEW</a>
+        <a href="#men" data-magnetic>MEN</a>
+        <a href="#women" data-magnetic>WOMEN</a>
+        <a href="#collections" data-magnetic>COLLECTIONS</a>
+        <a href="#sale" class="sale-link" data-magnetic>SALE</a>
+      </nav>
+      <div class="header-actions">
+        <button id="search-btn" aria-label="Search" data-magnetic>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button id="theme-toggle" aria-label="Toggle Theme" data-magnetic>
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button id="wishlist-btn" aria-label="Wishlist" data-magnetic>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span id="wishlist-count" class="badge">0</span>
+        </button>
+        <button id="cart-btn" aria-label="Shopping Bag" data-magnetic>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span id="cart-count" class="badge">0</span>
+        </button>
+        <button id="mobile-menu-btn" class="mobile-only" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu">
+    <button class="close-menu-btn" id="close-menu-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <nav class="mobile-nav-links brand-font">
+      <a href="#new">NEW</a>
+      <a href="#men">MEN</a>
+      <a href="#women">WOMEN</a>
+      <a href="#collections">COLLECTIONS</a>
+      <a href="#sale" class="sale-link">SALE</a>
+      <a href="#" id="mobile-theme-toggle" style="color: var(--accent); margin-top: 1rem;">TOGGLE THEME</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div id="hero-3d-container" class="hero-3d"></div>
+      <div class="hero-image-wrapper gs-reveal">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1600&auto=format&fit=crop" alt="High-end fashion model" class="hero-img" data-cursor="explore">
+        <div class="hero-img-glow"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-label gs-fade-up">NOVA / COLLECTION 01</div>
+        <h1 class="brand-font gs-fade-up gs-delay-1">WEAR<br>THE FUTURE.</h1>
+        <p class="gs-fade-up gs-delay-2">Modern silhouettes. Premium materials.<br>Designed for the next generation.</p>
+        <div class="hero-buttons gs-fade-up gs-delay-3">
+          <a href="#collections" class="btn btn-primary" data-magnetic>SHOP COLLECTION</a>
+          <a href="#lookbook" class="btn btn-outline" data-magnetic>EXPLORE LOOKBOOK</a>
+        </div>
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator gs-fade-up gs-delay-3">
+        <div class="scroll-dot"></div>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-wrapper">
+      <div class="marquee">
+        <span>NOVA</span><span class="dot">•</span><span>NEW SEASON</span><span class="dot">•</span>
+        <span>PREMIUM MATERIALS</span><span class="dot">•</span><span>LIMITED EDITION</span><span class="dot">•</span>
+        <span>DESIGNED FORWARD</span><span class="dot">•</span>
+        <span>NOVA</span><span class="dot">•</span><span>NEW SEASON</span><span class="dot">•</span>
+        <span>PREMIUM MATERIALS</span><span class="dot">•</span><span>LIMITED EDITION</span><span class="dot">•</span>
+        <span>DESIGNED FORWARD</span><span class="dot">•</span>
+        <span>NOVA</span><span class="dot">•</span><span>NEW SEASON</span><span class="dot">•</span>
+        <span>PREMIUM MATERIALS</span><span class="dot">•</span><span>LIMITED EDITION</span><span class="dot">•</span>
+        <span>DESIGNED FORWARD</span><span class="dot">•</span>
+      </div>
+    </div>
+
+    <!-- Featured Collection -->
+    <section id="collections" class="section">
+      <div class="section-header gs-fade-up">
+        <h2 class="brand-font">FEATURED COLLECTION</h2>
+        <p>Pieces designed to move with you.</p>
+      </div>
+      
+      <div class="filter-tabs gs-fade-up">
+        <button class="filter-btn active" data-filter="All" data-magnetic>All</button>
+        <button class="filter-btn" data-filter="Men" data-magnetic>Men</button>
+        <button class="filter-btn" data-filter="Women" data-magnetic>Women</button>
+        <button class="filter-btn" data-filter="Accessories" data-magnetic>Accessories</button>
+        <button class="filter-btn" data-filter="Jackets" data-magnetic>Jackets</button>
+        <button class="filter-btn" data-filter="Hoodies" data-magnetic>Hoodies</button>
+        <button class="filter-btn" data-filter="T-Shirts" data-magnetic>T-Shirts</button>
+        <button class="filter-btn" data-filter="Sneakers" data-magnetic>Sneakers</button>
+      </div>
+      
+      <div class="sort-wrapper gs-fade-up">
+        <select id="sort-select" class="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+
+      <div class="product-grid" id="featured-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- Category Section -->
+    <section class="section category-section">
+      <div class="category-grid">
+        <a href="#men" class="category-card gs-reveal" data-tilt data-cursor="view">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=800&auto=format&fit=crop" alt="Men's Fashion" loading="lazy">
+          </div>
+          <div class="category-overlay"></div>
+          <div class="category-content">
+            <h3 class="brand-font">MEN</h3>
+            <span class="category-link">EXPLORE <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </div>
+        </a>
+        <a href="#women" class="category-card gs-reveal gs-delay-1" data-tilt data-cursor="view">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop" alt="Women's Fashion" loading="lazy">
+          </div>
+          <div class="category-overlay"></div>
+          <div class="category-content">
+            <h3 class="brand-font">WOMEN</h3>
+            <span class="category-link">EXPLORE <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </div>
+        </a>
+        <a href="#accessories" class="category-card gs-reveal gs-delay-2" data-tilt data-cursor="view">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=800&auto=format&fit=crop" alt="Accessories" loading="lazy">
+          </div>
+          <div class="category-overlay"></div>
+          <div class="category-content">
+            <h3 class="brand-font">ACCESSORIES</h3>
+            <span class="category-link">EXPLORE <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3D Object Showcase -->
+    <section class="object-showcase section">
+      <div class="object-content gs-fade-up">
+        <h2 class="brand-font">THE NOVA OBJECT</h2>
+        <h3>ENGINEERED FOR MOTION</h3>
+        <p>Performance materials meet contemporary design in our most advanced silhouette yet.</p>
+        <button class="btn btn-outline" id="discover-object-btn" data-magnetic>DISCOVER THE OBJECT</button>
+      </div>
+      <div id="object-3d-container" class="object-3d gs-fade-up gs-delay-1" data-cursor="view"></div>
+    </section>
+
+    <!-- New Arrivals (Horizontal Scroll) -->
+    <section id="new" class="section new-arrivals">
+      <div class="section-header gs-fade-up">
+        <h2 class="brand-font">NEW ARRIVALS</h2>
+      </div>
+      <div class="horizontal-scroll" id="new-arrivals-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner gs-reveal-full">
+      <div class="promo-bg" id="promo-bg"></div>
+      <div class="promo-content">
+        <h2 class="brand-font gs-fade-up">BUILT FOR THE NEXT MOVE.</h2>
+        <p class="gs-fade-up gs-delay-1">Explore the latest NOVA collection.</p>
+        <div class="gs-fade-up gs-delay-2">
+          <a href="#collections" class="btn btn-primary" data-magnetic>SHOP NOW</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lookbook -->
+    <section id="lookbook" class="section lookbook-section">
+      <div class="section-header gs-fade-up">
+        <h2 class="brand-font">LOOKBOOK</h2>
+      </div>
+      <div class="lookbook-grid">
+        <div class="lookbook-item lb-1 gs-reveal" data-cursor="explore">
+          <div class="lb-img-wrapper"><img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=800&auto=format&fit=crop" alt="Look 01" loading="lazy"></div>
+          <div class="lookbook-label">01 / FORM</div>
+          <p class="editorial-text">Defining the modern silhouette with stark, uncompromising architecture.</p>
+        </div>
+        <div class="lookbook-item lb-2 gs-reveal gs-delay-1" data-cursor="explore">
+          <div class="lb-img-wrapper"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=800&auto=format&fit=crop" alt="Look 02" loading="lazy"></div>
+          <div class="lookbook-label">02 / MOTION</div>
+          <p class="editorial-text">Engineered fabrics that breathe and bend with human movement.</p>
+        </div>
+        <div class="lookbook-item lb-3 gs-reveal" data-cursor="explore">
+          <div class="lb-img-wrapper"><img src="https://images.unsplash.com/photo-1550614000-4b95dd2cb967?q=80&w=800&auto=format&fit=crop" alt="Look 03" loading="lazy"></div>
+          <div class="lookbook-label">03 / STRUCTURE</div>
+          <p class="editorial-text">Layers of precision, weaving utility directly into aesthetics.</p>
+        </div>
+        <div class="lookbook-item lb-4 gs-reveal gs-delay-1" data-cursor="explore">
+          <div class="lb-img-wrapper"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop" alt="Look 04" loading="lazy"></div>
+          <div class="lookbook-label">04 / FUTURE</div>
+          <p class="editorial-text">A glimpse into the next generation of essential wear.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section newsletter-section gs-fade-up">
+      <div class="newsletter-content">
+        <h2 class="brand-font">JOIN THE NOVA LIST</h2>
+        <p>Get early access to new drops, limited releases and private events.</p>
+        <form id="newsletter-form" class="newsletter-form">
+          <input type="email" placeholder="Your email address" required aria-label="Email Address">
+          <button type="submit" class="btn btn-primary" data-magnetic>JOIN</button>
+        </form>
+        <p id="newsletter-msg" class="newsletter-msg"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand gs-fade-up">
+        <h2 class="brand-font">NOVA</h2>
+        <p>WEAR THE FUTURE.</p>
+      </div>
+      <div class="footer-col gs-fade-up gs-delay-1">
+        <h4 class="brand-font">SHOP</h4>
+        <ul>
+          <li><a href="#new">New Arrivals</a></li>
+          <li><a href="#men">Men</a></li>
+          <li><a href="#women">Women</a></li>
+          <li><a href="#accessories">Accessories</a></li>
+          <li><a href="#sale" class="sale-link">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col gs-fade-up gs-delay-2">
+        <h4 class="brand-font">ABOUT</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col gs-fade-up gs-delay-3">
+        <h4 class="brand-font">SUPPORT</h4>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col gs-fade-up gs-delay-4">
+        <h4 class="brand-font">SOCIAL</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 NOVA. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Overlays -->
+  <div class="overlay-backdrop" id="overlay-backdrop"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3 class="brand-font">YOUR BAG</h3>
+      <button class="close-btn" id="close-cart-btn" aria-label="Close Cart" data-magnetic>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Injected via JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>SUBTOTAL</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+      <button class="btn btn-primary w-full" id="checkout-btn" data-magnetic>CHECKOUT</button>
+    </div>
+  </div>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="close-btn" id="close-search-btn" aria-label="Close Search" data-magnetic>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="search-container">
+      <input type="text" id="search-input" class="search-input brand-font" placeholder="SEARCH NOVA..." autocomplete="off">
+      <div class="search-results-info" id="search-results-info"></div>
+      <div class="product-grid" id="search-results-grid"></div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal" id="quick-view-modal">
+    <div class="modal-content" id="modal-content">
+      <button class="close-btn" id="close-modal-btn" aria-label="Close Modal" data-magnetic>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-grid" id="modal-body">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/script.js" type="module"></script>
+</body>
+</html>
